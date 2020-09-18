@@ -1,0 +1,80 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+
+    <title>Login</title>
+    <style>
+        .container {
+            position: relative;
+            top: 100%;
+            transform: translateY(+43%);
+            width: 650px;
+        }
+    </style>
+
+</head>
+
+<body>
+    <div class="container">
+        <div class="card bg-primary">
+            <div align="right"><a class="text-white" href="/">X</a></div>
+            <p class="h2 text-center text-white">Login</p>
+            <div class="card align-items-center">
+
+
+                <br>
+                <br>
+
+                <div class="">
+                    <form action="login" method="POST">
+                        {% csrf_token %}
+                        <div class="input-group mb-3">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text bg-primary text-white" id="inputGroup-sizing-default">Username</span>
+                            </div>
+                            <input type="text" name="username" class="form-control" aria-describedby="inputGroup-sizing-default" placeholder="Enter username">
+                        </div>
+                        <div class="input-group mb-3">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text bg-primary text-white" id="inputGroup-sizing-default">Password </span>
+                            </div>
+                            <input type="password" name="password" class="form-control" aria-describedby="inputGroup-sizing-default" placeholder="Enter password">
+                        </div>
+                        <p class="text-center">
+                            <input class="bg-primary text-white" type="submit" value="Login">
+                        </p>
+                        <p class="text-center">
+                            <a class="text-dark" href="register">No account? Create one..</a>
+                        </p>
+                        <br>
+                    </form>
+                    <div>
+                        <center>
+                            {% for message in messages %}
+                            <h3> {{message}} </h3>
+                            {% endfor %}
+                        </center>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- <div class="container d-flex h-100">
+    <div class="card justify-content-center align-self-center">
+    </div>
+    </div>
+    Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
+</body>
+
+</html>

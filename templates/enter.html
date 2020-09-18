@@ -1,0 +1,100 @@
+{% extends "base.html" %} {% block content %}
+<div class="container">
+    <h2 class="list-group-item list-group-item-primary">Hello, {{user.username}}</h2>
+    <p class="h4">Enter your Data for today...</p>
+
+    <form action="input" method="post">
+        {% csrf_token %}
+        <div class="form-group">
+            <label for="temp">Temperature</label>
+            <input type="number" class="form-control" id="temp" name="temp" placeholder="in deg C">
+        </div>
+        <div>
+            {% for message in messages %}
+            <p class="text-danger"> {{message}} </p>
+            {% endfor %}
+        </div>
+        <p>Experiencing any....</p>
+        <div class="form-check form-check-inline">
+            <input class="form-check-input" type="checkbox" id="cough" value="Cough" name="cough">
+            <label class="form-check-label" for="cough">Cough</label>
+        </div>
+        <div class="form-check form-check-inline">
+            <input class="form-check-input" type="checkbox" id="fever" value="Fever" name="fever">
+            <label class="form-check-label" for="Fever">Fever</label>
+        </div>
+        <div class="form-check form-check-inline">
+            <input class="form-check-input" type="checkbox" id="dib" value="dib" name="dib">
+            <label class="form-check-label" for="dib">Difficulty in Breathing</label>
+        </div>
+        <div class="form-check form-check-inline">
+            <input class="form-check-input" type="checkbox" id="los" value="los" name="los">
+            <label class="form-check-label" for="los">Loss of senses of smell and taste</label>
+        </div>
+        <div class="form-check form-check-inline">
+            <input class="form-check-input" type="checkbox" id="not" value="not" name="not1">
+            <label class="form-check-label" for="not">None of these</label>
+        </div>
+
+        <br><br>
+
+        <p>Have you ever had any..?</p>
+        <div class="form-check form-check-inline">
+            <input class="form-check-input" type="checkbox" id="diabetes" value="diabetes" name="diabetes">
+            <label class="form-check-label" for="diabetes">Diabetes</label>
+        </div>
+        <div class="form-check form-check-inline">
+            <input class="form-check-input" type="checkbox" id="hypertension" value="hypertension" name="hypertension">
+            <label class="form-check-label" for="hypertension">Hypertension</label>
+        </div>
+        <div class="form-check form-check-inline">
+            <input class="form-check-input" type="checkbox" id="lung" value="lung" name="lung">
+            <label class="form-check-label" for="lung">Lung Disease</label>
+        </div>
+        <div class="form-check form-check-inline">
+            <input class="form-check-input" type="checkbox" id="heart" value="heart" name="heart">
+            <label class="form-check-label" for="heart">Heart Disease</label>
+        </div>
+        <div class="form-check form-check-inline">
+            <input class="form-check-input" type="checkbox" id="kidney" value="kidney" name="kidney">
+            <label class="form-check-label" for="kidney">Kidney Disorder</label>
+        </div>
+        <div class="form-check form-check-inline">
+            <input class="form-check-input" type="checkbox" id="not" value="not" name="not2">
+            <label class="form-check-label" for="not">None of these</label>
+        </div>
+
+        <br><br>
+
+        <p>Have you travelled anywhere in the last 28-45 days?</p>
+        <div class="form-check form-check-inline">
+            <input class="form-check-input" type="checkbox" id="yes" value="yes" name="yes">
+            <label class="form-check-label" for="yes">Yes</label>
+        </div>
+        <div class="form-check form-check-inline">
+            <input class="form-check-input" type="checkbox" id="no" value="no" name="no">
+            <label class="form-check-label" for="no">No</label>
+        </div>
+
+        <br><br>
+
+        <p>Have anything related?</p>
+        <div class="form-check form-check-inline">
+            <input class="form-check-input" type="checkbox" id="a" value="a" name="a">
+            <label class="form-check-label" for="los">Was close to someone who has tested covid positive recently.</label>
+        </div>
+        <div class="form-check form-check-inline">
+            <input class="form-check-input" type="checkbox" id="b" value="b" name="b">
+            <label class="form-check-label" for="los">Was doing some volunteer work.</label>
+        </div>
+        <div class="form-check form-check-inline">
+            <input class="form-check-input" type="checkbox" id="c" value="c" name="c">
+            <label class="form-check-label" for="not">None of these</label>
+        </div>
+
+        <br><br>
+
+        <button type="submit" class="btn btn-primary">Submit</button>
+    </form>
+</div>
+{% endblock %}

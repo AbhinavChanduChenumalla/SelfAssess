@@ -1,0 +1,92 @@
+{% extends "base.html" %} {% block content %}
+<div class="container">
+    {% if user.is_authenticated and not user.username == 'security'%}
+
+    <h2 class="list-group-item list-group-item-primary">Hello, {{user.username}}</h2>
+    <div class="row">
+        <div class="col-4">
+            <div class="list-group" id="list-tab" role="tablist">
+                <a class="list-group-item list-group-item-action active" id="list-home-list" data-toggle="list" href="#list-home" role="tab" aria-controls="home">Home</a>
+                <a class="list-group-item list-group-item-action" id="list-profile-list" data-toggle="list" href="#list-profile" role="tab" aria-controls="profile">Profile</a>
+                <a class="list-group-item list-group-item-action" id="list-reports-list" data-toggle="list" href="#list-reports" role="tab" aria-controls="messages">Reports</a>
+                <a class="list-group-item list-group-item-action" id="list-settings-list" data-toggle="list" href="#list-settings" role="tab" aria-controls="settings">Settings</a>
+            </div>
+        </div>
+        <div class="col-8">
+            <div class="tab-content" id="nav-tabContent">
+                <div class="tab-pane fade show active" id="list-home" role="tabpanel" aria-labelledby="list-home-list">
+                    <p>COVID-19 affects different people in different ways. Most infected people will develop mild to moderate illness and recover without hospitalization.</p>
+                    <h5>Most common symptoms:</h5>
+                    <p>Fever</p>
+                    <p>Dry cough</p>
+                    <p>Tiredness</p>
+                    <h5>Common symptoms:</h5>
+                    <p>Aches and pains</p>
+                    <p>Sore throat</p>
+                    <p>Diarrhoea</p>
+                    <p>Conjunctivitis</p>
+                    <p>Headache</p>
+                    <p>Loss of taste or smell</p>
+                    <p>A rash on skin, or discolouration of fingers or toes</p>
+                </div>
+                {% if user.is_authenticated %}
+                <div class="tab-pane fade" id="list-profile" role="tabpanel" aria-labelledby="list-profile-list">
+                    <ul class="list-group">
+                        <li class="list-group-item">
+                            <div class="row">
+                                <div class="col text-info font-weight-bold">Name</div>
+                                <div class="col font-italic">{{person.name}}</div>
+                            </div>
+                        </li>
+                        <li class="list-group-item">
+                            <div class="row">
+                                <div class="col text-info font-weight-bold">Age</div>
+                                <div class="col font-italic">{{person.age}}</div>
+                            </div>
+                        </li>
+                        <li class="list-group-item">
+                            <div class="row">
+                                <div class="col text-info font-weight-bold">College ID</div>
+                                <div class="col font-italic">{{person.username}}</div>
+                            </div>
+                        </li>
+                        <li class="list-group-item">
+                            <div class="row">
+                                <div class="col text-info font-weight-bold">Mobile no</div>
+                                <div class="col font-italic">{{person.mobile_no}}</div>
+                            </div>
+                        </li>
+                    </ul>
+                </div>{% endif %}
+                <div class="tab-pane fade" id="list-reports" role="tabpanel" aria-labelledby="list-reports-list">Reports</div>
+                <div class="tab-pane fade" id="list-settings" role="tabpanel" aria-labelledby="list-settings-list">Settings</div>
+            </div>
+        </div>
+    </div>
+    {% endif %} {% if user.username == 'security' %}
+    <br>
+    <p class="h2">Enter the ID to check the reports of the User.</p>
+    <form method="POST" action="query">
+        {% csrf_token %}
+        <div class="input-group mb-3">
+            <div class="input-group-prepend">
+                <span class="input-group-text" id="inputGroup-sizing-default">User ID</span>
+            </div>
+            <input type="text" name="ID" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" placeholder="e.g. 17881A05**">
+        </div>
+
+        <input class="btn btn-info" type="submit" value="Check">
+    </form>
+    <div>
+        {% for message in messages %}
+        <h3> {{message}} </h3>
+        {% endfor %}
+    </div>
+    {% endif %} {% if not user.is_authenticated %}
+    <br>
+    <p class="h3">This application is basically developed to follow the precautions to be safe from COVID-19. </p>
+    <p><span class="h5">Note: </span>You cannot enter or check data without being registered to the website. </p>
+    {% endif %}
+
+</div>
+{% endblock %}

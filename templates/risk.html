@@ -1,0 +1,69 @@
+{% extends "base.html" %} {% block content %}
+<div class="container">
+    <br>
+    <table class="table table-hover table-bordered">
+        <thead>
+            <tr class="table-secondary">
+                <th scope="col">College ID</th>
+                <th scope="col">Name</th>
+                <th scope="col">Age</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr class="table-light">
+                <td>{{d.collegeID}}</td>
+                <td>{{d.name}}</td>
+                <td>{{d.age}}</td>
+            </tr>
+        </tbody>
+    </table>
+    <div class="d-flex flex-row-reverse bd-highlight">
+        <div class="p-2 bd-highlight"><a role="button" href="\" class="btn btn-dark">Back</a></div>
+    </div>
+    <div>
+
+        {% if risk == 'low' %}
+        <div class="d-flex flex-nowrap bd-highlight">
+            <div class="order-1 p-2 bd-highlight">
+                <p class="h2">Risk: </p>
+            </div>
+            <div class="order-2 p-2 bd-highlight">
+                <div class="d-flex flex-nowrap bd-highlight">
+                    <div class="bg-success order-1 p-2 bd-highlight">Low</div>
+                    <div class="order-2 p-2 bd-highlight">Moderate</div>
+                    <div class="order-3 p-2 bd-highlight">High</div>
+                </div>
+            </div>
+        </div>
+
+
+        {% endif %} {% if risk == 'moderate' %}
+        <div class="d-flex flex-nowrap bd-highlight">
+            <div class="order-1 p-2 bd-highlight">
+                <p class="h2">Risk: </p>
+            </div>
+            <div class="order-2 p-2 bd-highlight">
+                <div class="d-flex flex-nowrap bd-highlight">
+                    <div class="order-1 p-2 bd-highlight">Low</div>
+                    <div class="bg-warning order-2 p-2 bd-highlight">Moderate</div>
+                    <div class="order-3 p-2 bd-highlight">High</div>
+                </div>
+            </div>
+        </div>
+        {% endif %} {% if risk == 'high' %}
+        <div class="d-flex flex-nowrap bd-highlight">
+            <div class="order-1 p-2 bd-highlight">
+                <p class="h2">Risk: </p>
+            </div>
+            <div class="order-2 p-2 bd-highlight">
+                <div class="d-flex flex-nowrap bd-highlight">
+                    <div class="order-1 p-2 bd-highlight">Low</div>
+                    <div class="order-2 p-2 bd-highlight">Moderate</div>
+                    <div class="bg-danger order-3 p-2 bd-highlight">High</div>
+                </div>
+            </div>
+        </div>
+        {% endif %}
+    </div>
+</div>
+{% endblock %}
