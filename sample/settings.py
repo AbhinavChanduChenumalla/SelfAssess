@@ -110,7 +110,7 @@ AUTH_PASSWORD_VALIDATORS = [
 
 LANGUAGE_CODE = 'en-us'
 
-TIME_ZONE = 'UTC'
+TIME_ZONE = 'Asia/Kolkata'
 
 USE_I18N = True
 
@@ -123,3 +123,14 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/3.1/howto/static-files/
 
 STATIC_URL = '/static/'
+
+LOCAL_STATIC_CON_PATH = os.path.join(os.path.dirname(BASE_DIR), 'static_cdn_test')
+
+STATIC_ROOT = os.path.join(LOCAL_STATIC_CON_PATH, 'static')
+STATICFILES_DIRS = [
+    os.path.join(BASE_DIR,'staticfiles')
+]
+
+
+MEDIA_ROOT = os.path.join(LOCAL_STATIC_CON_PATH, 'media')
+MEDIA_URL = '/media/'

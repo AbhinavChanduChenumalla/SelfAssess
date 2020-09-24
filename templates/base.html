@@ -41,6 +41,9 @@
                 <li class="nav-item {% if enter %}active{% endif %}">
                     <a class="nav-link" href="input">Fill Today's Data</a>
                 </li>
+                <li class="nav-item {% if testhistory %}active{% endif %}">
+                    <a class="nav-link" href="testDetails">Covid Test History</a>
+                </li>
                 {% endif %} {% if user.is_authenticated %}
                 <li class="nav-item {% if profile %}active{% endif %}">
                     <a class="nav-link" href='profile'>Hello, {{user.username}}</a>

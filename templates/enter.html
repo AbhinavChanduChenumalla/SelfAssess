@@ -5,9 +5,11 @@
 
     <form action="input" method="post">
         {% csrf_token %}
-        <div class="form-group">
-            <label for="temp">Temperature</label>
-            <input type="number" class="form-control" id="temp" name="temp" placeholder="in deg C">
+        <div class="input-group mb-3 w-50">
+            <div class="input-group-prepend">
+                <span class="input-group-text" id="inputGroup-sizing-default">Temperature</span>
+            </div>
+            <input type="number" name="temp" class="form-control" aria-describedby="inputGroup-sizing-default" placeholder="in deg C">
         </div>
         <div>
             {% for message in messages %}

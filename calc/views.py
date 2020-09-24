@@ -1,8 +1,9 @@
 from django.shortcuts import render,redirect,get_object_or_404
 from django.http import HttpResponse
 from django.contrib.auth.models import User, auth
-from .models import Question,Person
+from .models import Question,Person,TestDetails
 from django.utils import timezone
+import datetime
 from django.contrib import messages
 # Create your views here.
 
@@ -32,10 +33,38 @@ def profile_update_action(request):
 
 def home(request):
     if request.user.is_authenticated:
-        person = Person.objects.get(username=request.user.username)
-        return render(request,'home.html',{'person':person,'home':True})
+        person = []
+        if Person.objects.filter(username=request.user.username).exists():
+            person = Person.objects.get(username=request.user.username)
+        test = []
+        if TestDetails.objects.filter(username=request.user.username).exists():
+            test = TestDetails.objects.filter(username=request.user.username)
+        return render(request,'home.html',{'person':person,'home':True,'test':test})
     return render(request,'home.html')
 
+def testDetails(request):
+    test = []
+    if TestDetails.objects.filter(username=request.user.username).exists():
+        test = TestDetails.objects.filter(username=request.user.username)
+    p = Person.objects.get(username=request.user.username)
+    return render(request,'testresult.html',{'person':p,'testhistory':True,'test':test})
+
+def updateTests(request):
+    person = Person.objects.get(username=request.user.username)
+    if request.method == 'POST':
+        time = request.POST['time-of-test']
+        if time == '':
+            time = datetime.date.today()
+        if 'neg' in request.POST:
+            result = False
+        else:
+            result = True
+        test_file = request.POST['test_file']
+        test = TestDetails.objects.create(username=request.user.username,timestamp=time,result=result,test_file=test_file)
+        test.save()
+        test_records = TestDetails.objects.filter(username=request.user.username)
+        return render(request,'home.html',{'person':person,'home':True,'test':test_records})
+    return render(request,'home.html')
 
 def input(request):
     if request.method == 'POST':
@@ -80,16 +109,17 @@ def input(request):
             social_distance = 'Was doing some volunteer work.'
         else:
             social_distance = 'safe'
-        ques = Question.objects.create(user=request.user,temperature=temperature,current_symptoms=current_symptoms,previous_diseases=previous_diseases,travel=travel,social_distance=social_distance,timestamp=timezone.now)
+        ques = Question.objects.create(user=request.user,temperature=temperature,current_symptoms=current_symptoms,previous_diseases=previous_diseases,travel=travel,social_distance=social_distance,timestamp=timezone.localtime)
         ques.save()
         return redirect('/')
     else:
         return render(request,'enter.html',{'enter':True})
 
 def previous(request):
-    d = Question.objects.filter(user=request.user)
-    d = d[::-1]
-    p = Person.objects.get(username=request.user.username)
+    d = Question.objects.filter(user=request.user).reverse()
+    p = []
+    if Person.objects.filter(username=request.user.username).exists():
+        p = Person.objects.get(username=request.user.username)
     return render(request,'prev.html',{'data':d,'p':p,'prev':True})
 
 

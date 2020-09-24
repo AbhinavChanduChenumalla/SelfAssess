@@ -22,7 +22,7 @@
                 <td>{{p.age}}</td>
                 <td>{{d.temperature}}</td>
                 <td>{{d.social_distance}}</td>
-                <td>{{d.travel}}</td>
+                <td>{% if d.travel %} yes {% else %} no {% endif %}</td>
                 <td>{{d.current_symptoms}}</td>
                 <td>{{d.previous_diseases}}</td>
             </tr>
